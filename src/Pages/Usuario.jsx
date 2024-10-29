@@ -400,6 +400,8 @@ const Usuario = () => {
       headers: { Authorization: ""},
       data: idUsuario,  // Aquí pasas el ID del usuario en el cuerpo de la solicitud
     };
+
+    console.log(payload.data);
     await axios
       .delete(baseUrlDel, payload) // No pasas el ID en la URL
       .then((response) => {
@@ -426,9 +428,9 @@ const Usuario = () => {
     const XUsuario = Object.values(...usuario);
     cambiarIdUsuario({ campo: XUsuario[0], valido: "true" });
     cambiarNombre({ campo: XUsuario[1], valido: "true" });
-    cambiarNombreUsuario({ campo: XUsuario[2], valido: "true" });
-    cambiarRol({ campo: XUsuario[3], valido: "true" });
-    cambiarCorreo({ campo: XUsuario[4], valido: "true" });
+    cambiarNombreUsuario({ campo: XUsuario[4], valido: "true" });
+    cambiarRol({ campo: XUsuario[2], valido: "true" });
+    cambiarCorreo({ campo: XUsuario[5], valido: "true" });
     caso === "Editar" ? abrirCerrarModalEditar() : abrirCerrarModalEliminar();
   };
 

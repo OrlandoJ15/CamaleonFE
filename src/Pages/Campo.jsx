@@ -50,9 +50,33 @@ const baseUrlPut = "https://localhost:44366/Campo/ModCampo";
 const baseUrlDel = "https://localhost:44366/Campo/DelCampo";
 
 
-//////////////////////////TERMINA URLs///////////////////////////
+
+
+// const ConstEndPoints = () => {
+
+// const baseUrlCampo2 = "https://localhost:44366/Campo/RecCampo";
+
+//   // const baseUrl = "https://localhost:44366/Campo/RecCampo";
+//   // const baseUrlPost = "https://localhost:44366/Campo/InsCampo";
+//   // const baseUrlPut = "https://localhost:44366/Campo/ModCampo";
+//   // const baseUrlDel = "https://localhost:44366/Campo/DelCampo";
+
+// const [data2, setData2] = useState([]);
+
+// const peticionGet2 = async () => {
+//   await axios.get(baseUrlCampo2).then((response) => {
+//     setData2(response.data2);
+//     console.log("Console 2", response.data2);
+//   });
+// };
+// //////////////////////////TERMINA URLs///////////////////////////
+
+// }
+
+
 
 const Campo = () => {
+
   //////////////////////////INICIA CONSTANTES - STATE///////////////////////////
 
   const [IdUsuario, cambiarIdUsuario] = useState({ campo: "", valido: null });
@@ -232,7 +256,6 @@ const Campo = () => {
   //////////////////////////TERMINA STYLE///////////////////////////
 
   ////////////////////////////////CONSTANTES MODAL/////////////////////////////////
-
   const [data, setData] = useState([]);
   const [modalInsertar, setModalInsertar] = useState(false);
   const [modalEditar, setModalEditar] = useState(false);
@@ -438,10 +461,10 @@ const Campo = () => {
   };
 
   const peticionGet = async () => {
-    await axios.get(baseUrlCampo).then((response) => {
-      setData(response.data);
-      console.log(response.data);
-    });
+  await axios.get(baseUrlCampo).then((response) => {
+    setData(response.data);
+    console.log(response.data);
+  });
   };
 
   useEffect(() => {

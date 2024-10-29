@@ -131,7 +131,7 @@ const GrupoInput = styled.div`
 
 const Input = styled.input`
   width: 100%;
-  background: #fff;
+  background: #000;
   border-radius: 3px;
   height: 45px;
   line-height: 45px;
@@ -161,7 +161,7 @@ const Input = styled.input`
 
 const InputShapeTotales = styled.input`
   width: 100%;
-  background: #fff;
+  background: #000;
   border-radius: 3px;
   height: 45px;
   line-height: 45px;
@@ -262,7 +262,7 @@ const Boton = styled.button`
   line-height: 45px;
   width: 30%;
   background: #000;
-  color: #fff;
+  color: #000;
   font-weight: bold;
   border: none;
   border-radius: 3px;

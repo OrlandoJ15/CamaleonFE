@@ -19,30 +19,24 @@ import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 
 
 const columnas = [
-    { title: "IdCliente", field: "idCliente" },
-    { title: "Nombre", field: "nombre" },
-    { title: "apellidos", field: "apellidos" },
-    { title: "Correo", field: "correo" },
-    { title: "Telefono", field: "telefono", type: "numeric" },
-    { title: "IdUsuario", field: "idUsuario" },
+    { title: "IdDetalle", field: "idDetalle" },
+    { title: "Descripcion", field: "descripcion" },
+    { title: "IdPasciente", field: "idPasciente" },
   ];
 
 
-const baseUrl = "https://localhost:44366/Cliente/RecCliente";
-const baseUrlPost = "https://localhost:44366/Cliente/InsCliente";
-const baseUrlPut = "https://localhost:44366/Cliente/ModCliente";
-const baseUrlDel = "https://localhost:44366/Cliente/DelCliente";
+const baseUrl = "https://localhost:44366/DetallePasciente/RecDetallePasciente";
+const baseUrlPost = "https://localhost:44366/DetallePasciente/InsDetallePasciente";
+const baseUrlPut = "https://localhost:44366/DetallePasciente/ModDetallePasciente";
+const baseUrlDel = "https://localhost:44366/DetallePasciente/DelDetallePasciente";
 
 
-const Cliente = () => {
+const DetallePasciente = () => {
     //////////////////////////INICIA CONSTANTES - STATE///////////////////////////
   
-    const [IdCliente, cambiarIdCliente] = useState({ campo: "", valido: null });
-    const [Nombre, cambiarNombre] = useState({ campo: "", valido: null });
-    const [apellidos, cambiarapellidos] = useState({campo: "",valido: null,});
-    const [Correo, cambiarCorreo] = useState({ campo: "", valido: null });
-    const [Telefono, cambiarTelefono] = useState({ campo: 0, valido: null });
-    const [Usuario, cambiarUsuario] = useState({ campo: "", valido: null });
+    const [IdDetallePasciente, cambiarIdDetallePasciente] = useState({ campo: "", valido: null });
+    const [Descripcion, cambiarDescripcion] = useState({ campo: "", valido: null });
+    const [Pasciente, cambiarPasciente] = useState({ campo: "", valido: null });
   
     const [formularioValido, cambiarFormularioValido] = useState(false);
   
@@ -51,34 +45,28 @@ const Cliente = () => {
     /////////////////////////////////////EXPRESIONES//////////////////////////////////
   
     const expresionesRegulares = {
-      IdCliente: /^[0-9]*$/,
-      Nombre: /^[a-zA-Z0-9_-\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-      apellidos: /^[a-zA-Z0-9_-\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-      Telefono: /^[1-9][0-9]{7}$/, // solo numero del 1-9
-      Correo: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, //formato de correo electronico
-      Usuario: /^[0-9]*$/, //contrasena con almenos 4 letras y minimo 1 mayuscukla, 4 numeros y minimo 8 carcteres
+      IdDetallePasciente: /^[0-9]*$/,
+      Descripcion: /^[a-zA-Z0-9_-\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+      // apellidos: /^[a-zA-Z0-9_-\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+      // Telefono: /^[1-9][0-9]{7}$/, // solo numero del 1-9
+      // Correo: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, //formato de correo electronico
+      Pasciente: /^[0-9]*$/, //contrasena con almenos 4 letras y minimo 1 mayuscukla, 4 numeros y minimo 8 carcteres
     };
   
     /////////////////////////////////////EXPRESIONES//////////////////////////////////
   
-    //MANEJO DEL A OPCION DE SUBMIT DEL FORMULARIO PARA AGREGAR UN NUEVO Cliente
+    //MANEJO DEL A OPCION DE SUBMIT DEL FORMULARIO PARA AGREGAR UN NUEVO DetallePasciente
     const onsubmitpost = (e) => {
       e.preventDefault();
       if (
-        IdCliente.valido === "true" &&
-        Nombre.valido === "true" &&
-        apellidos.valido === "true" &&
-        Telefono.valido === "true" &&
-        Correo.valido === "true" &&
-        Usuario.valido === "true"
+        IdDetallePasciente.valido === "true" &&
+        Descripcion.valido === "true" &&
+        Pasciente.valido === "true"
       ) {
         cambiarFormularioValido(true);
-        cambiarIdCliente({ campo: "", valido: "" });
-        cambiarNombre({ campo: "", valido: null });
-        cambiarapellidos({ campo: "", valido: null });
-        cambiarTelefono({ campo: "", valido: null });
-        cambiarCorreo({ campo: "", valido: null });
-        cambiarUsuario({ campo: "", valido: null });
+        cambiarIdDetallePasciente({ campo: "", valido: "" });
+        cambiarDescripcion({ campo: "", valido: null });
+        cambiarPasciente({ campo: "", valido: null });
         showQuestionPost();
       } else {
         cambiarFormularioValido(false);
@@ -88,18 +76,14 @@ const Cliente = () => {
     const onsubmitput = (e) => {
       e.preventDefault();
       if (
-        IdCliente.valido === "true" &&
-        Nombre.valido === "true" &&
-        apellidos.valido === "true" &&
-        Telefono.valido === "true" &&
-        Correo.valido === "true"
+        IdDetallePasciente.valido === "true" &&
+        Descripcion.valido === "true" &&
+        Pasciente.valido === "true"
       ) {
         cambiarFormularioValido(true);
-        cambiarIdCliente({ campo: "", valido: "" });
-        cambiarNombre({ campo: "", valido: null });
-        cambiarapellidos({ campo: "", valido: null });
-        cambiarTelefono({ campo: "", valido: null });
-        cambiarCorreo({ campo: "", valido: null });
+        cambiarIdDetallePasciente({ campo: "", valido: "" });
+        cambiarDescripcion({ campo: "", valido: null });
+        cambiarPasciente({ campo: "", valido: null });
         showQuestionPut();
       } else {
         cambiarFormularioValido(false);
@@ -108,30 +92,30 @@ const Cliente = () => {
   
     ///////////////////////////////////AXIOS FUNCIONES//////////////////////////////
   
-     const endPointClienteXId =
-       "https://localhost:44366/Cliente/RecClienteXId/" + IdCliente.campo;
+     const endPointDetallePascienteXId =
+       "https://localhost:44366/DetallePasciente/RecDetallePascienteXId/" + IdDetallePasciente.campo;
   
     ///////////////////////////////////FINALIZA AXIOS FUNCIONES//////////////////////////////
   
     ////////////////////////////////VALIDACIONES ID/////////////////////////////////
   
-    function ValidarExistenciaClienteId() {
+    function ValidarExistenciaDetallePascienteId() {
       function showError() {
         Swal.fire({
           icon: "error",
           title: "Cuidado",
-          text: "Codigo Cliente Existente, Intente Nuevamente",
+          text: "Codigo DetallePasciente Existente, Intente Nuevamente",
         });
       }
   
       const MetodoValidar = async () => {
-        console.log(Cliente);
-        await axios.get(endPointClienteXId).then((response) => {
+        console.log(DetallePasciente);
+        await axios.get(endPointDetallePascienteXId).then((response) => {
           const data = response.data;
           if (data === null) {  
-            cambiarIdCliente({ campo: IdCliente.campo, valido: "true" });
+            cambiarIdDetallePasciente({ campo: IdDetallePasciente.campo, valido: "true" });
           } else {
-            cambiarIdCliente({ campo: "", valido: "false" });
+            cambiarIdDetallePasciente({ campo: "", valido: "false" });
             showError();
           }
         });
@@ -194,12 +178,9 @@ const Cliente = () => {
   
     const peticionPost = async () => {
       const options = {
-        idCliente: IdCliente.campo,
-        nombre: Nombre.campo,
-        apellidos: apellidos.campo,
-        telefono: Telefono.campo,
-        correo: Correo.campo,
-        idUsuario: Usuario.campo,
+        idDetallePasciente: IdDetallePasciente.campo,
+        descripcion: Descripcion.campo,
+        idPasciente: Pasciente.campo,
       };
 
       console.log(options);
@@ -241,30 +222,29 @@ const Cliente = () => {
   
     const peticionPut = async () => {
       const options = {
-        idCliente: IdCliente.campo,
-        nombre: Nombre.campo,
-        apellidos: apellidos.campo,
-        Telefono: Telefono.campo,
-        correo: Correo.campo,
+        idDetallePasciente: IdDetallePasciente.campo,
+        descripcion: Descripcion.campo,
+        idPasciente: Pasciente.campo,
       };
+
+      console.log(options);
   
       await axios
         .put(baseUrlPut, options)
         .then((response) => {
           // Crear una copia de los datos originales
           const dataNueva = [...data];
-          // Mapear sobre la copia para modificar el Cliente
-          const updatedData = dataNueva.map((Cliente) => {
-            if (Cliente.idCliente === options.idCliente) {
+          // Mapear sobre la copia para modificar el DetallePasciente
+          const updatedData = dataNueva.map((DetallePasciente) => {
+            console.log("DetallePasciente :" + DetallePasciente.idDetalle);
+            console.log("options :" + options.descripcion);
+            if (DetallePasciente.idDetalle === options.idDetallePasciente) {
               return {
-                ...Cliente,
-                nombre: options.nombre,
-                apellidos: options.apellidos,
-                Telefono: options.Telefono,
-                correo: options.correo,
+                ...DetallePasciente,
+                descripcion: options.descripcion,
               };
             }
-            return Cliente;
+            return DetallePasciente;
           });
   
           // Actualizar el estado con el nuevo array actualizado
@@ -283,33 +263,33 @@ const Cliente = () => {
     ////////////////////////PETICION DELETE////////////////////////
   
     const peticionDelete = async () => {
-      // Creas el objeto con el IdCliente
+      // Creas el objeto con el IdDetallePasciente
       console.log('nueva');
       // const options = {
-      //   IdCliente: IdCliente.campo;
+      //   IdDetallePasciente: IdDetallePasciente.campo;
   
       // };
-      const idCliente2 = IdCliente.campo; // Asegúrate de que esto esté obteniendo el ID correcto
-      console.log(idCliente2);
+      const idDetallePasciente2 = IdDetallePasciente.campo; // Asegúrate de que esto esté obteniendo el ID correcto
+      console.log(idDetallePasciente2);
   
     
       const payload = {
         headers: { Authorization: "", 'Content-Type': 'application/json'},
-        data: idCliente2,  // Aquí pasas el ID del Cliente en el cuerpo de la solicitud
+        data: idDetallePasciente2,  // Aquí pasas el ID del DetallePasciente en el cuerpo de la solicitud
       };
       await axios
         .delete(baseUrlDel, payload) // No pasas el ID en la URL
         .then((response) => {
-          console.log("Cliente eliminado:", response);
+          console.log("DetallePasciente eliminado:", response);
     
-          // Filtras los datos eliminando el Cliente
+          // Filtras los datos eliminando el DetallePasciente
           setData(
-            data.filter((Cliente) => Cliente.IdCliente !== options.idCliente)
+            data.filter((DetallePasciente) => DetallePasciente.IdDetallePasciente !== options.idDetallePasciente)
           );
           abrirCerrarModalEliminar();
         })
         .catch((error) => {
-          console.log("Error al eliminar Cliente:", error);
+          console.log("Error al eliminar DetallePasciente:", error);
         });
 
 
@@ -322,13 +302,11 @@ const Cliente = () => {
   
     //////////////////////////PETICION SELECT////////////////////////
   
-    const seleccionarCliente = async (Cliente, caso) => {
-      const XCliente = Object.values(...Cliente);
-      cambiarIdCliente({ campo: XCliente[0], valido: "true" });
-      cambiarNombre({ campo: XCliente[1], valido: "true" });
-      cambiarapellidos({ campo: XCliente[2], valido: "true" });
-      cambiarCorreo({ campo: XCliente[3], valido: "true" });
-      cambiarTelefono({ campo: XCliente[4], valido: "true" });
+    const seleccionarDetallePasciente = async (DetallePasciente, caso) => {
+      const XDetallePasciente = Object.values(...DetallePasciente);
+      cambiarIdDetallePasciente({ campo: XDetallePasciente[0], valido: "true" });
+      cambiarDescripcion({ campo: XDetallePasciente[1], valido: "true" });
+      cambiarPasciente({ campo: XDetallePasciente[2], valido: "true" });
       caso === "Editar" ? abrirCerrarModalEditar() : abrirCerrarModalEliminar();
     };
   
@@ -344,9 +322,9 @@ const Cliente = () => {
   
     //////////////////////////FINALIZA PETICION SELECT////////////////////////
   
-    ////////////////////////// PETICION CAMBIO Usuario////////////////////////
+    ////////////////////////// PETICION CAMBIO Pasciente////////////////////////
   
-    //////////////////////////FINALIZA PETICION CAMBIO Usuario////////////////////////
+    //////////////////////////FINALIZA PETICION CAMBIO Pasciente////////////////////////
   
     //////////////////////////MODALES////////////////////////
   
@@ -416,7 +394,7 @@ const Cliente = () => {
   
     const bodyInsertar = (
       <div style={scTelefonolVertical}>
-        <h3>Incluir Cliente v2</h3>
+        <h3>Incluir DetallePasciente v2</h3>
         <div className="relleno-general">
           {" "}
           General
@@ -424,71 +402,38 @@ const Cliente = () => {
             <Formulario>
               <Columna>
                 <InputGeneral
-                  estado={IdCliente}
-                  cambiarEstado={cambiarIdCliente}
+                  estado={IdDetallePasciente}
+                  cambiarEstado={cambiarIdDetallePasciente}
                   tipo="text"
-                  label="Id Cliente"
-                  placeholder="Introduzca Id Del Cliente"
-                  name="idCliente"
-                  leyendaError="El Id Del Cliente solo puede contener numeros."
-                  expresionRegular={expresionesRegulares.IdCliente}
-                  onChange={ValidarExistenciaClienteId}
-                  onBlur={ValidarExistenciaClienteId}
+                  label="Id DetallePasciente"
+                  placeholder="Introduzca Id Del DetallePasciente"
+                  name="idDetallePasciente"
+                  leyendaError="El Id Del DetallePasciente solo puede contener numeros."
+                  expresionRegular={expresionesRegulares.IdDetallePasciente}
+                  onChange={ValidarExistenciaDetallePascienteId}
+                  onBlur={ValidarExistenciaDetallePascienteId}
                   autofocus
                 />
                 <InputGeneral
-                  estado={Nombre}
-                  cambiarEstado={cambiarNombre}
+                  estado={Descripcion}
+                  cambiarEstado={cambiarDescripcion}
                   tipo="text"
-                  label="Nombre"
-                  placeholder="Introduzca El Nombre"
-                  name="Nombre"
-                  leyendaError="El Nombre solo puede contener letras y espacios."
-                  expresionRegular={expresionesRegulares.Nombre}
+                  label="Descripcion"
+                  placeholder="Introduzca El Descripcion"
+                  name="Descripcion"
+                  leyendaError="El Descripcion solo puede contener letras y espacios."
+                  expresionRegular={expresionesRegulares.Descripcion}
                 />
   
                 <InputGeneral
-                  estado={apellidos}
-                  cambiarEstado={cambiarapellidos}
-                  tipo="text"
-                  label="apellidos"
-                  placeholder="Introduzca El apellidos"
-                  name="apellidos"
-                  leyendaError="Los apellidoss solo pueden contener letras y espacios."
-                  expresionRegular={expresionesRegulares.apellidos}
-                />
-  
-                <InputGeneral
-                  estado={Telefono}
-                  cambiarEstado={cambiarTelefono}
+                  estado={Pasciente}
+                  cambiarEstado={cambiarPasciente}
                   tipo="number"
-                  label="Telefono"
-                  placeholder="Introduzca El Telefono"
-                  name="Telefono"
-                  leyendaError="El Telefono solo puede contener numeros"
-                  expresionRegular={expresionesRegulares.Telefono}
-                />
-  
-                <InputGeneral
-                  estado={Correo}
-                  cambiarEstado={cambiarCorreo}
-                  tipo="email"
-                  label="Correo"
-                  placeholder="Introduzca El Correo Electronico"
-                  name="Correo"
-                  leyendaError="El Formato Del Correo No Es Valido"
-                  expresionRegular={expresionesRegulares.Correo}
-                />
-  
-                <InputGeneral
-                  estado={Usuario}
-                  cambiarEstado={cambiarUsuario}
-                  tipo="number"
-                  label="Usuario"
-                  placeholder="Ingrese el usuario al que pertenece"
-                  name="Usuario"
-                  leyendaError="El Usuario solo puede contener numeros"
-                  expresionRegular={expresionesRegulares.Usuario}
+                  label="Pasciente"
+                  placeholder="Ingrese el Pasciente al que pertenece"
+                  name="Pasciente"
+                  leyendaError="El Pasciente solo puede contener numeros"
+                  expresionRegular={expresionesRegulares.Pasciente}
                 />
               </Columna>
             </Formulario>
@@ -522,58 +467,22 @@ const Cliente = () => {
   
     const bodyEditar = (
       <div style={scTelefonolVertical}>
-        <h3>Editar Cliente v2</h3>
+        <h3>Editar DetallePasciente v2</h3>
         <div className="relleno-general">
           General
           <div className="container-fluid">
             <Formulario>
               <Columna>
                 <InputGeneral
-                  estado={Nombre}
-                  cambiarEstado={cambiarNombre}
+                  estado={Descripcion}
+                  cambiarEstado={cambiarDescripcion}
                   tipo="text"
-                  label="Nombre"
-                  placeholder="Introduzca El Nombre"
-                  name="Nombre"
-                  leyendaError="El Nombre solo puede contener letras y espacios."
-                  expresionRegular={expresionesRegulares.Nombre}
-                  value={Nombre.campo}
-                />
-  
-                <InputGeneral
-                  estado={apellidos}
-                  cambiarEstado={cambiarapellidos}
-                  tipo="text"
-                  label="apellidos"
-                  placeholder="Introduzca El apellidos"
-                  name="apellidos"
-                  leyendaError="El Nombre del Cliente solo puede contener letras y espacios."
-                  expresionRegular={expresionesRegulares.apellidos}
-                  value={apellidos.campo}
-                />
-  
-                <InputGeneral
-                  estado={Telefono}
-                  cambiarEstado={cambiarTelefono}
-                  tipo="number"
-                  label="Telefono"
-                  placeholder="Introduzca El Telefono"
-                  name="Telefono"
-                  leyendaError="El Telefono solo puede contener números"
-                  expresionRegular={expresionesRegulares.Telefono}
-                  value={Telefono.campo}
-                />
-  
-                <InputGeneral
-                  estado={Correo}
-                  cambiarEstado={cambiarCorreo}
-                  tipo="email"
-                  label="Correo"
-                  placeholder="Introduzca El Correo Electrónico"
-                  name="Correo"
-                  leyendaError="El Formato Del Correo No Es Válido"
-                  expresionRegular={expresionesRegulares.Correo}
-                  value={Correo.campo}
+                  label="Descripcion"
+                  placeholder="Introduzca El Descripcion"
+                  name="Descripcion"
+                  leyendaError="El Descripcion solo puede contener letras y espacios."
+                  expresionRegular={expresionesRegulares.Descripcion}
+                  value={Descripcion.campo}
                 />
               </Columna>
             </Formulario>
@@ -599,7 +508,7 @@ const Cliente = () => {
   
     function showQuestionDel() {
       Swal.fire({
-        title: "Seguro que desea Eliminar el Cliente?",
+        title: "Seguro que desea Eliminar el DetallePasciente?",
         showDenyButton: true,
         confirmButtonText: "Eliminar",
         denyButtonText: `Cancelar`,
@@ -617,18 +526,16 @@ const Cliente = () => {
   
     const bodyEliminar = (
       <div style={scTelefonolVertical}>
-        <h3>Eliminar Cliente</h3>
+        <h3>Eliminar DetallePasciente</h3>
         <div className="relleno-general">
           {" "}
           General
           <div className="container-fluid">
             <Formulario>
               <Columna>
-                <h4>Codigo: {IdCliente.campo}</h4>
-                <h4>Nombre: {Nombre.campo}</h4>
-                <h4>apellidos: {apellidos.campo}</h4>
-                <h4>Telefono: {Telefono.campo}</h4>
-                <h4>Correo: {Correo.campo}</h4>
+                <h4>Codigo: {IdDetallePasciente.campo}</h4>
+                <h4>Descripcion: {Descripcion.campo}</h4>
+                <h4>Pasciente: {Pasciente.campo}</h4>
               </Columna>
             </Formulario>
           </div>
@@ -647,10 +554,10 @@ const Cliente = () => {
     );
   
     return (
-      <div className="Cliente">
+      <div className="DetallePasciente">
         <div className="banner">
           <h3>
-            <b>200-Mantenimiento Clientes</b>
+            <b>200-Mantenimiento DetallePascientes</b>
           </h3>
         </div>
         <div className="btn-agrega">
@@ -658,7 +565,7 @@ const Cliente = () => {
             startIcon={<AddBox />}
             onClick={() => abrirCerrarModalInsertar()}
           >
-            Agregar Cliente
+            Agregar DetallePasciente
           </Button>
         </div>
         <br />
@@ -666,18 +573,18 @@ const Cliente = () => {
         <MaterialTable
           columns={columnas}
           data={data}
-          title="Clientes"
+          title="DetallePascientes"
           actions={[
             {
               icon: Edit,
               tooltip: "Modificar Modificar",
-              onClick: (event, rowData) => seleccionarCliente(rowData, "Editar"),
+              onClick: (event, rowData) => seleccionarDetallePasciente(rowData, "Editar"),
             },
             {
               icon: DeleteOutline,
-              tooltip: "Eliminar Cliente",
+              tooltip: "Eliminar DetallePasciente",
               onClick: (event, rowData) =>
-                seleccionarCliente(rowData, "Eliminar"),
+                seleccionarDetallePasciente(rowData, "Eliminar"),
             },
           ]}
           options={{
@@ -710,4 +617,4 @@ const Cliente = () => {
     );
   };
   
-  export default Cliente;
+  export default DetallePasciente;
